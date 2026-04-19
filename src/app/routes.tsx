@@ -13,6 +13,7 @@ import { Help } from "./pages/Help";
 import { Login } from "./pages/Login";
 import { MLOpsWizard } from "./pages/MLOpsWizard";
 import { EvaluationReport } from "./pages/EvaluationReport";
+import { MLOpsDashboard } from "./pages/MLOpsDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
       { path: "recommendation-analytics", Component: RecommendationAnalytics },
       { path: "mlops-wizard", Component: MLOpsWizard },
       { path: "evaluation-report", Component: EvaluationReport },
+      { path: "mlops-dashboard", Component: MLOpsDashboard },
       { path: "settings", Component: Settings },
       { path: "help", Component: Help },
     ],
