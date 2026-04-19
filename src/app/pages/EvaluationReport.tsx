@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { MLOpsEvaluationReport } from "../components/MLOpsEvaluationReport";
-import { LineChart, User } from "lucide-react";
+import { LineChart, User, AlertTriangle } from "lucide-react";
 import { Badge } from "../components/ui/badge";
+import { Alert, AlertDescription } from "../components/ui/alert";
 import {
   Select,
   SelectContent,
@@ -12,6 +13,16 @@ import {
 
 export function EvaluationReport() {
   const [selectedUser, setSelectedUser] = useState<string>("admin@test.com");
+
+  // Mock function to check if user has sufficient data for personalized model
+  // In production, this would be an API call
+  const hasPersonalizedModel = (userEmail: string): boolean => {
+    // Mock: Only admin@test.com and ahmad.hidayat@test.com have personalized models
+    const usersWithModels = ["admin@test.com", "ahmad.hidayat@test.com"];
+    return usersWithModels.includes(userEmail);
+  };
+
+  const isPersonalized = hasPersonalizedModel(selectedUser);
 
   const handleDeploy = () => {
     alert("Deploying XGBoost model to production...");
@@ -57,9 +68,13 @@ export function EvaluationReport() {
               </Select>
               <Badge
                 variant="outline"
-                className="border-rose-300 text-rose-700 bg-rose-50 font-semibold"
+                className={
+                  isPersonalized
+                    ? "border-rose-300 text-rose-700 bg-rose-50 font-semibold"
+                    : "border-amber-300 text-amber-700 bg-amber-50 font-semibold"
+                }
               >
-                Personalized Model
+                {isPersonalized ? "Personalized Model" : "Global Baseline"}
               </Badge>
             </div>
           </div>
@@ -70,18 +85,38 @@ export function EvaluationReport() {
             MLOps Evaluation Report
           </h1>
 
-          {/* Personalized Model Badge */}
+          {/* Personalized Model Badge or Fallback Badge */}
           <div className="mb-3">
-            <Badge className="bg-rose-50 hover:bg-rose-100 text-rose-800 border-2 border-rose-200 px-4 py-2.5 text-base font-bold shadow-sm">
-              <User className="w-5 h-5 mr-2" />
-              Personalized Model for: {selectedUser}
-            </Badge>
+            {isPersonalized ? (
+              <Badge className="bg-rose-50 hover:bg-rose-100 text-rose-800 border-2 border-rose-200 px-4 py-2.5 text-base font-bold shadow-sm">
+                <User className="w-5 h-5 mr-2" />
+                Personalized Model for: {selectedUser}
+              </Badge>
+            ) : (
+              <Badge className="bg-amber-50 hover:bg-amber-100 text-amber-800 border-2 border-amber-300 px-4 py-2.5 text-base font-bold shadow-sm">
+                <AlertTriangle className="w-5 h-5 mr-2" />
+                ⚠️ Fallback to Global Baseline
+              </Badge>
+            )}
           </div>
 
           <p className="text-gray-600">
             Review training results and deploy the winning model to production
           </p>
         </div>
+
+        {/* Info Banner for Fallback State */}
+        {!isPersonalized && (
+          <div className="mb-8 max-w-5xl mx-auto">
+            <Alert className="bg-amber-50 border-2 border-amber-300 text-amber-900">
+              <AlertTriangle className="h-5 w-5 text-amber-600" />
+              <AlertDescription className="ml-2 text-base">
+                <span className="font-semibold">Insufficient data for {selectedUser}.</span>{" "}
+                Displaying Global Baseline metrics until enough typing telemetry is collected to train a personalized model.
+              </AlertDescription>
+            </Alert>
+          </div>
+        )}
 
         <MLOpsEvaluationReport onDeploy={handleDeploy} />
 
