@@ -11,11 +11,18 @@ import {
 } from "../components/ui/table";
 import { Badge } from "../components/ui/badge";
 import { Progress } from "../components/ui/progress";
-import { Check, Loader2 } from "lucide-react";
+import { Check, Loader2, ChevronDown } from "lucide-react";
 import {
   ExpandableSessionTable,
   SessionFeaturePreviewDto,
 } from "../components/ExpandableSessionTable";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -103,6 +110,7 @@ const modelResults = [
 export function MLOpsWizard() {
   const [currentStep, setCurrentStep] = useState<Step>(1);
   const [progress, setProgress] = useState<number>(0);
+  const [selectedUser, setSelectedUser] = useState<string>("admin@test.com");
 
   const handleExtractData = () => {
     setCurrentStep(2);
@@ -222,6 +230,52 @@ export function MLOpsWizard() {
                 </p>
               </CardHeader>
               <CardContent>
+                {/* User Selection Control Area */}
+                <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-4">
+                    <label
+                      htmlFor="user-select"
+                      className="text-sm font-semibold text-gray-700 whitespace-nowrap"
+                    >
+                      Select Subject / User:
+                    </label>
+                    <Select
+                      value={selectedUser}
+                      onValueChange={setSelectedUser}
+                    >
+                      <SelectTrigger
+                        id="user-select"
+                        className="w-64 bg-white border-gray-300 hover:border-gray-400 transition-colors"
+                      >
+                        <SelectValue placeholder="Choose a user" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin@test.com">
+                          admin@test.com
+                        </SelectItem>
+                        <SelectItem value="user1@example.com">
+                          user1@example.com
+                        </SelectItem>
+                        <SelectItem value="user2@example.com">
+                          user2@example.com
+                        </SelectItem>
+                        <SelectItem value="ahmad.hidayat@test.com">
+                          ahmad.hidayat@test.com
+                        </SelectItem>
+                        <SelectItem value="siti.nurhaliza@test.com">
+                          siti.nurhaliza@test.com
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Badge
+                      variant="outline"
+                      className="border-rose-300 text-rose-700 bg-rose-50"
+                    >
+                      Personalized Model
+                    </Badge>
+                  </div>
+                </div>
+
                 <ExpandableSessionTable pendingSessions={pendingSessions} />
                 <div className="flex justify-end mt-6">
                   <Button

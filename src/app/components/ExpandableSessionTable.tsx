@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import {
   Table,
@@ -62,10 +62,9 @@ export function ExpandableSessionTable({
         <TableBody>
           {/* Step 3: HTML Template - Iterate over sessions */}
           {pendingSessions.map((session) => (
-            <>
+            <Fragment key={session.id}>
               {/* Master Row (Summary) */}
               <TableRow
-                key={session.id}
                 className="hover:bg-gray-50 cursor-pointer transition-colors"
                 onClick={() => toggleRow(session.id)}
               >
@@ -192,7 +191,7 @@ export function ExpandableSessionTable({
                   </TableCell>
                 </TableRow>
               )}
-            </>
+            </Fragment>
           ))}
         </TableBody>
       </Table>

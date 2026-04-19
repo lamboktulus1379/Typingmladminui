@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { MLOpsEvaluationReport } from "../components/MLOpsEvaluationReport";
-import { LineChart } from "lucide-react";
+import { LineChart, User } from "lucide-react";
+import { Badge } from "../components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 
 export function EvaluationReport() {
+  const [selectedUser, setSelectedUser] = useState<string>("admin@test.com");
+
   const handleDeploy = () => {
     alert("Deploying XGBoost model to production...");
   };
@@ -9,10 +20,64 @@ export function EvaluationReport() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
+        {/* User Selection Control Area */}
+        <div className="mb-8 max-w-5xl mx-auto">
+          <div className="bg-white border-2 border-gray-200 rounded-lg p-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <label
+                htmlFor="user-select-report"
+                className="text-sm font-semibold text-gray-700 whitespace-nowrap"
+              >
+                Select Subject / User:
+              </label>
+              <Select value={selectedUser} onValueChange={setSelectedUser}>
+                <SelectTrigger
+                  id="user-select-report"
+                  className="w-64 bg-white border-gray-300 hover:border-gray-400 transition-colors"
+                >
+                  <SelectValue placeholder="Choose a user" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="admin@test.com">
+                    admin@test.com
+                  </SelectItem>
+                  <SelectItem value="user1@example.com">
+                    user1@example.com
+                  </SelectItem>
+                  <SelectItem value="user2@example.com">
+                    user2@example.com
+                  </SelectItem>
+                  <SelectItem value="ahmad.hidayat@test.com">
+                    ahmad.hidayat@test.com
+                  </SelectItem>
+                  <SelectItem value="siti.nurhaliza@test.com">
+                    siti.nurhaliza@test.com
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <Badge
+                variant="outline"
+                className="border-rose-300 text-rose-700 bg-rose-50 font-semibold"
+              >
+                Personalized Model
+              </Badge>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">
             MLOps Evaluation Report
           </h1>
+
+          {/* Personalized Model Badge */}
+          <div className="mb-3">
+            <Badge className="bg-rose-50 hover:bg-rose-100 text-rose-800 border-2 border-rose-200 px-4 py-2.5 text-base font-bold shadow-sm">
+              <User className="w-5 h-5 mr-2" />
+              Personalized Model for: {selectedUser}
+            </Badge>
+          </div>
+
           <p className="text-gray-600">
             Review training results and deploy the winning model to production
           </p>
