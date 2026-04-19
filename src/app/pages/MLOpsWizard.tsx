@@ -12,6 +12,10 @@ import {
 import { Badge } from "../components/ui/badge";
 import { Progress } from "../components/ui/progress";
 import { Check, Loader2 } from "lucide-react";
+import {
+  ExpandableSessionTable,
+  SessionFeaturePreviewDto,
+} from "../components/ExpandableSessionTable";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -22,27 +26,56 @@ const steps = [
   { number: 4, label: "Deploy" },
 ];
 
-const sessionData = [
+const pendingSessions: SessionFeaturePreviewDto[] = [
   {
-    sessionId: "SN-001",
+    id: "session-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    userName: "Ahmad Hidayat",
     wpm: 45,
-    dwellTime: "120ms",
-    flightTime: "85ms",
-    weakFinger: "Pinky Left",
+    weakestFinger: "Pinky Left",
+    accuracy: 92.5,
+    rawTextTyped: "The quick brown fox jumps over the lazy dog",
+    dwellLeftPinky: 120,
+    flightLeftPinky: 85,
   },
   {
-    sessionId: "SN-002",
+    id: "session-b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    userName: "Siti Nurhaliza",
     wpm: 62,
-    dwellTime: "95ms",
-    flightTime: "70ms",
-    weakFinger: "Ring Right",
+    weakestFinger: "Ring Right",
+    accuracy: 96.8,
+    rawTextTyped: "Machine learning algorithms analyze typing patterns effectively",
+    dwellLeftPinky: 95,
+    flightLeftPinky: 70,
   },
   {
-    sessionId: "SN-003",
+    id: "session-c3d4e5f6-a7b8-9012-cdef-123456789012",
+    userName: "Budi Santoso",
     wpm: 38,
-    dwellTime: "145ms",
-    flightTime: "110ms",
-    weakFinger: "Index Left",
+    weakestFinger: "Index Left",
+    accuracy: 88.3,
+    rawTextTyped: "Practice makes perfect in touch typing skills",
+    dwellLeftPinky: 145,
+    flightLeftPinky: 110,
+  },
+  {
+    id: "session-d4e5f6a7-b8c9-0123-def1-234567890123",
+    userName: "Rina Wijaya",
+    wpm: 55,
+    weakestFinger: "Middle Right",
+    accuracy: 94.2,
+    rawTextTyped: "Data science requires both statistical knowledge and programming",
+    dwellLeftPinky: 108,
+    flightLeftPinky: 92,
+  },
+  {
+    id: "session-e5f6a7b8-c9d0-1234-ef12-345678901234",
+    userName: "Andi Pratama",
+    wpm: 71,
+    weakestFinger: "Ring Left",
+    accuracy: 97.5,
+    rawTextTyped: "Artificial intelligence transforms how we interact with technology",
+    dwellLeftPinky: 88,
+    flightLeftPinky: 65,
   },
 ];
 
@@ -168,14 +201,14 @@ export function MLOpsWizard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-xl font-semibold text-blue-900">
-                      150 Pending Typing Sessions Found
+                      {pendingSessions.length} Pending Typing Sessions Found
                     </h3>
                     <p className="text-blue-700 mt-1">
                       Ready for model retraining
                     </p>
                   </div>
                   <Badge className="bg-blue-600 text-white px-4 py-2 text-lg">
-                    150 Sessions
+                    {pendingSessions.length} Sessions
                   </Badge>
                 </div>
               </CardContent>
@@ -183,33 +216,13 @@ export function MLOpsWizard() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Data Preview</CardTitle>
+                <CardTitle>Pending Data Preview</CardTitle>
+                <p className="text-sm text-gray-600 mt-1">
+                  Expand rows to view detailed session metrics and typing patterns
+                </p>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Session ID</TableHead>
-                      <TableHead>WPM</TableHead>
-                      <TableHead>Dwell Time</TableHead>
-                      <TableHead>Flight Time</TableHead>
-                      <TableHead>Weak Finger</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {sessionData.map((session) => (
-                      <TableRow key={session.sessionId}>
-                        <TableCell className="font-medium">
-                          {session.sessionId}
-                        </TableCell>
-                        <TableCell>{session.wpm}</TableCell>
-                        <TableCell>{session.dwellTime}</TableCell>
-                        <TableCell>{session.flightTime}</TableCell>
-                        <TableCell>{session.weakFinger}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <ExpandableSessionTable pendingSessions={pendingSessions} />
                 <div className="flex justify-end mt-6">
                   <Button
                     onClick={handleExtractData}
