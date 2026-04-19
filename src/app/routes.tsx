@@ -12,6 +12,7 @@ import { Settings } from "./pages/Settings";
 import { Help } from "./pages/Help";
 import { Login } from "./pages/Login";
 import { MLOpsWizard } from "./pages/MLOpsWizard";
+import { EvaluationReport } from "./pages/EvaluationReport";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: "typing-analysis", Component: TypingAnalysis },
       { path: "recommendation-analytics", Component: RecommendationAnalytics },
       { path: "mlops-wizard", Component: MLOpsWizard },
+      { path: "evaluation-report", Component: EvaluationReport },
       { path: "settings", Component: Settings },
       { path: "help", Component: Help },
     ],
