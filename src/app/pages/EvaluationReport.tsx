@@ -1,4 +1,5 @@
 import { MLOpsEvaluationReport } from "../components/MLOpsEvaluationReport";
+import { LineChart } from "lucide-react";
 
 export function EvaluationReport() {
   const handleDeploy = () => {
@@ -19,8 +20,36 @@ export function EvaluationReport() {
 
         <MLOpsEvaluationReport onDeploy={handleDeploy} />
 
-        {/* Additional Information Section */}
+        {/* --- MODEL INSIGHTS (BARU DITAMBAHKAN UNTUK SIDANG SKRIPSI) --- */}
         <div className="mt-12 max-w-5xl mx-auto">
+          <div className="bg-white border-2 border-rose-100 rounded-lg p-8 shadow-sm">
+            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+              <LineChart className="w-5 h-5 mr-2 text-rose-600" />
+              Winning Model Insights (XGBoost)
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+              <div>
+                <p className="text-gray-600 mb-1">Top Predictive Feature:</p>
+                <p className="font-semibold text-gray-900">Flight Time (Left Pinky)</p>
+              </div>
+              <div>
+                <p className="text-gray-600 mb-1">Macro Precision:</p>
+                <p className="font-semibold text-gray-900">93.5%</p>
+              </div>
+              <div>
+                <p className="text-gray-600 mb-1">Macro Recall:</p>
+                <p className="font-semibold text-gray-900">94.8%</p>
+              </div>
+              <div>
+                <p className="text-gray-600 mb-1">Primary Misclassification:</p>
+                <p className="font-semibold text-rose-600">Left Ring confused as Left Pinky</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Information Section (ASLI DARI ANDA) */}
+        <div className="mt-8 max-w-5xl mx-auto">
           <div className="bg-white border-2 border-gray-200 rounded-lg p-8 shadow-sm">
             <h3 className="text-lg font-bold text-gray-900 mb-4">
               Training Pipeline Information
@@ -55,6 +84,7 @@ export function EvaluationReport() {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

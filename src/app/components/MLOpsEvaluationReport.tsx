@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Trophy, LineChart } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 interface AlgorithmResult {
   algorithm: string;
@@ -169,56 +169,6 @@ export function MLOpsEvaluationReport({
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
-
-      {/* Model Insights Section */}
-      <Card className="border-2 border-gray-200 shadow-sm">
-        <CardContent className="p-8">
-          {/* Header with Icon */}
-          <div className="flex items-center gap-2 mb-6">
-            <LineChart className="w-6 h-6 text-rose-600" />
-            <h3 className="text-xl font-bold text-gray-900">
-              Winning Model Insights ({productionModel})
-            </h3>
-          </div>
-
-          {/* 2x2 Data Grid */}
-          <div className="grid grid-cols-2 gap-8">
-            {/* Top Predictive Feature */}
-            <div className="space-y-2">
-              <p className="text-sm text-gray-500 font-medium">
-                Top Predictive Feature
-              </p>
-              <p className="text-base font-bold text-gray-900">
-                Flight Time (Left Pinky) - 34%
-              </p>
-            </div>
-
-            {/* Macro Precision */}
-            <div className="space-y-2">
-              <p className="text-sm text-gray-500 font-medium">
-                Macro Precision
-              </p>
-              <p className="text-base font-bold text-gray-900">93.5%</p>
-            </div>
-
-            {/* Macro Recall */}
-            <div className="space-y-2">
-              <p className="text-sm text-gray-500 font-medium">Macro Recall</p>
-              <p className="text-base font-bold text-gray-900">94.8%</p>
-            </div>
-
-            {/* Primary Misclassification */}
-            <div className="space-y-2">
-              <p className="text-sm text-gray-500 font-medium">
-                Primary Misclassification
-              </p>
-              <p className="text-base font-bold text-rose-600">
-                Left Ring confused as Left Pinky
-              </p>
-            </div>
-          </div>
         </CardContent>
       </Card>
 
