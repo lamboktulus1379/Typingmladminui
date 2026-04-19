@@ -10,6 +10,7 @@ A premium, enterprise-grade UI component for displaying machine learning model e
 ✅ **Clean Header Card** - Summary with training date, total rows, and production model badge  
 ✅ **Leaderboard Table** - 3-column comparison of ML algorithms  
 ✅ **Winner Highlighting** - Subtle rose background tint for the winning model  
+✅ **Model Insights Card** - 2x2 grid showing detailed metrics and error analysis  
 ✅ **Premium Typography** - Bold, readable fonts with excellent spacing  
 ✅ **Action Button** - Large red CTA for deployment  
 ✅ **Fully Customizable** - All data can be passed as props  
@@ -98,6 +99,32 @@ interface AlgorithmResult {
 }
 ```
 
+## Component Sections
+
+### 1. Header Card
+- Displays training session metadata
+- Shows production model with trophy badge
+- Clean outlined container with shadow
+
+### 2. Leaderboard Table
+- Compares ML algorithms side-by-side
+- Highlights winning model with rose tint
+- Shows F1-Score, Accuracy, Training Latency
+
+### 3. Model Insights Card (NEW)
+- **Header**: LineChart icon + "Winning Model Insights (ModelName)"
+- **Layout**: 2x2 grid with 4 key data points
+- **Metrics**:
+  - Top Predictive Feature with importance percentage
+  - Macro Precision score
+  - Macro Recall score
+  - Primary Misclassification (highlighted in red/rose)
+- **Styling**: Subtle gray labels, bold values, error insights in rose color
+
+### 4. Action Area
+- Large deployment button (right-aligned)
+- Callback on click
+
 ## Design Specifications
 
 ### Color Palette
@@ -145,6 +172,30 @@ Replace all `rose-*` classes with your preferred color:
 - `rose-600` → `blue-600` (Blue theme)
 - `rose-600` → `emerald-600` (Green theme)
 - `rose-600` → `purple-600` (Purple theme)
+
+### Customize Model Insights
+The Model Insights card can be made dynamic by accepting props:
+
+```typescript
+interface ModelInsights {
+  topFeature: string;
+  featureImportance: string;
+  macroPrecision: string;
+  macroRecall: string;
+  misclassification: string;
+}
+
+// Pass as prop
+<MLOpsEvaluationReport 
+  insights={{
+    topFeature: "Dwell Time",
+    featureImportance: "42%",
+    macroPrecision: "95.2%",
+    macroRecall: "96.1%",
+    misclassification: "Custom error message"
+  }}
+/>
+```
 
 ### Add More Metrics
 Extend the `AlgorithmResult` interface and add new table columns:
