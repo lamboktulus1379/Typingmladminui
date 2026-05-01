@@ -15,6 +15,8 @@ interface AlgorithmResult {
   algorithm: string;
   f1Score: string;
   accuracy: string;
+  macroPrecision: string;
+  macroRecall: string;
   trainingLatency: string;
   isWinner?: boolean;
 }
@@ -32,6 +34,8 @@ const defaultResults: AlgorithmResult[] = [
     algorithm: "XGBoost",
     f1Score: "94.2%",
     accuracy: "93.8%",
+    macroPrecision: "91.8%",
+    macroRecall: "93.5%",
     trainingLatency: "450ms",
     isWinner: true,
   },
@@ -39,12 +43,16 @@ const defaultResults: AlgorithmResult[] = [
     algorithm: "Random Forest",
     f1Score: "89.5%",
     accuracy: "90.1%",
+    macroPrecision: "88.3%",
+    macroRecall: "90.1%",
     trainingLatency: "620ms",
   },
   {
     algorithm: "Logistic Regression",
     f1Score: "82.1%",
     accuracy: "81.0%",
+    macroPrecision: "82.1%",
+    macroRecall: "84.7%",
     trainingLatency: "120ms",
   },
 ];
@@ -104,6 +112,12 @@ export function MLOpsEvaluationReport({
                   Accuracy
                 </TableHead>
                 <TableHead className="font-bold text-gray-900 text-base py-5 px-6">
+                  Macro Precision
+                </TableHead>
+                <TableHead className="font-bold text-gray-900 text-base py-5 px-6">
+                  Macro Recall
+                </TableHead>
+                <TableHead className="font-bold text-gray-900 text-base py-5 px-6">
                   Training Latency
                 </TableHead>
               </TableRow>
@@ -155,6 +169,24 @@ export function MLOpsEvaluationReport({
                     }`}
                   >
                     {result.accuracy}
+                  </TableCell>
+                  <TableCell
+                    className={`py-6 px-6 ${
+                      result.isWinner
+                        ? "font-semibold text-gray-800 text-base"
+                        : "font-medium text-gray-700 text-base"
+                    }`}
+                  >
+                    {result.macroPrecision}
+                  </TableCell>
+                  <TableCell
+                    className={`py-6 px-6 ${
+                      result.isWinner
+                        ? "font-semibold text-gray-800 text-base"
+                        : "font-medium text-gray-700 text-base"
+                    }`}
+                  >
+                    {result.macroRecall}
                   </TableCell>
                   <TableCell
                     className={`py-6 px-6 ${
