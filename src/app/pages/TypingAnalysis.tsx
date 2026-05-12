@@ -1,15 +1,15 @@
 import { PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const pieData = [
-  { name: "Left Pinky", value: 35, color: "#14b8a6" },
-  { name: "Other", value: 65, color: "#0d9488" },
+  { id: "left-pinky", name: "Left Pinky", value: 35, color: "#14b8a6" },
+  { id: "other", name: "Other", value: 65, color: "#0d9488" },
 ];
 
 const areaData = [
-  { date: "2026-03-08", sessions: 6 },
-  { date: "2026-03-10", sessions: 8 },
-  { date: "2026-03-15", sessions: 12 },
-  { date: "2026-03-22", sessions: 15 },
+  { id: "day-1", date: "2026-03-08", sessions: 6 },
+  { id: "day-2", date: "2026-03-10", sessions: 8 },
+  { id: "day-3", date: "2026-03-15", sessions: 12 },
+  { id: "day-4", date: "2026-03-22", sessions: 15 },
 ];
 
 export function TypingAnalysis() {
@@ -134,6 +134,7 @@ export function TypingAnalysis() {
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
+                key="finger-distribution-pie"
                 data={pieData}
                 cx="50%"
                 cy="50%"
@@ -142,8 +143,8 @@ export function TypingAnalysis() {
                 paddingAngle={0}
                 dataKey="value"
               >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
+                {pieData.map((entry) => (
+                  <Cell key={entry.id} fill={entry.color} />
                 ))}
               </Pie>
             </PieChart>
@@ -155,11 +156,12 @@ export function TypingAnalysis() {
           <h3 className="text-lg font-semibold text-slate-800 mb-4">Daily Session Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={areaData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="date" stroke="#64748b" fontSize={12} />
-              <YAxis stroke="#64748b" fontSize={12} />
-              <Tooltip />
+              <CartesianGrid key="grid" strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis key="xaxis" dataKey="date" stroke="#64748b" fontSize={12} />
+              <YAxis key="yaxis" stroke="#64748b" fontSize={12} />
+              <Tooltip key="tooltip" />
               <Area
+                key="sessions-area"
                 type="monotone"
                 dataKey="sessions"
                 stroke="#3b82f6"

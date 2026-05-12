@@ -15,6 +15,7 @@ import { MLOpsWizard } from "./pages/MLOpsWizard";
 import { EvaluationReport } from "./pages/EvaluationReport";
 import { MLOpsDashboard } from "./pages/MLOpsDashboard";
 import { XAIDashboard } from "./pages/XAIDashboard";
+import { BiometricDemo } from "./pages/BiometricDemo";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
       { path: "evaluation-report", Component: EvaluationReport },
       { path: "mlops-dashboard", Component: MLOpsDashboard },
       { path: "xai-dashboard", Component: XAIDashboard },
+      { path: "biometric-demo", Component: BiometricDemo },
       { path: "settings", Component: Settings },
       { path: "help", Component: Help },
     ],
