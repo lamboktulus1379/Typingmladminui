@@ -40,6 +40,12 @@ const menuItems = [
     section: "You",
   },
   {
+    path: "/mlops-wizard-new",
+    label: "MLOps Wizard (New)",
+    icon: Cpu,
+    section: "You",
+  },
+  {
     path: "/evaluation-report",
     label: "Evaluation Report",
     icon: ClipboardCheck,

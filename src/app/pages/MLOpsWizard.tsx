@@ -11,7 +11,7 @@ import {
 } from "../components/ui/table";
 import { Badge } from "../components/ui/badge";
 import { Progress } from "../components/ui/progress";
-import { Check, Loader2, ChevronDown } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import {
   ExpandableSessionTable,
   SessionFeaturePreviewDto,
@@ -87,24 +87,9 @@ const pendingSessions: SessionFeaturePreviewDto[] = [
 ];
 
 const modelResults = [
-  {
-    algorithm: "Logistic Regression",
-    accuracy: 75,
-    f1Score: 0.72,
-    status: "Completed",
-  },
-  {
-    algorithm: "Random Forest",
-    accuracy: 88,
-    f1Score: 0.86,
-    status: "Completed",
-  },
-  {
-    algorithm: "XGBoost",
-    accuracy: 94,
-    f1Score: 0.91,
-    status: "Winner",
-  },
+  { algorithm: "Logistic Regression", accuracy: 75, f1Score: 0.72, status: "Completed" },
+  { algorithm: "Random Forest", accuracy: 88, f1Score: 0.86, status: "Completed" },
+  { algorithm: "XGBoost", accuracy: 94, f1Score: 0.91, status: "Winner" },
 ];
 
 export function MLOpsWizard() {
@@ -175,9 +160,7 @@ export function MLOpsWizard() {
                     <div className="mt-2 text-center">
                       <p
                         className={`text-sm font-medium ${
-                          currentStep >= step.number
-                            ? "text-blue-600"
-                            : "text-gray-500"
+                          currentStep >= step.number ? "text-blue-600" : "text-gray-500"
                         }`}
                       >
                         {step.label}
@@ -188,9 +171,7 @@ export function MLOpsWizard() {
                     <div className="flex-1 h-1 mx-4 relative top-[-16px]">
                       <div
                         className={`h-full rounded ${
-                          currentStep > step.number
-                            ? "bg-blue-600"
-                            : "bg-gray-200"
+                          currentStep > step.number ? "bg-blue-600" : "bg-gray-200"
                         }`}
                       />
                     </div>
@@ -211,9 +192,7 @@ export function MLOpsWizard() {
                     <h3 className="text-xl font-semibold text-blue-900">
                       {pendingSessions.length} Pending Typing Sessions Found
                     </h3>
-                    <p className="text-blue-700 mt-1">
-                      Ready for model retraining
-                    </p>
+                    <p className="text-blue-700 mt-1">Ready for model retraining</p>
                   </div>
                   <Badge className="bg-blue-600 text-white px-4 py-2 text-lg">
                     {pendingSessions.length} Sessions
@@ -230,7 +209,6 @@ export function MLOpsWizard() {
                 </p>
               </CardHeader>
               <CardContent>
-                {/* User Selection Control Area */}
                 <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <div className="flex items-center gap-4">
                     <label
@@ -239,10 +217,7 @@ export function MLOpsWizard() {
                     >
                       Select Subject / User:
                     </label>
-                    <Select
-                      value={selectedUser}
-                      onValueChange={setSelectedUser}
-                    >
+                    <Select value={selectedUser} onValueChange={setSelectedUser}>
                       <SelectTrigger
                         id="user-select"
                         className="w-64 bg-white border-gray-300 hover:border-gray-400 transition-colors"
@@ -250,21 +225,11 @@ export function MLOpsWizard() {
                         <SelectValue placeholder="Choose a user" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="admin@test.com">
-                          admin@test.com
-                        </SelectItem>
-                        <SelectItem value="user1@example.com">
-                          user1@example.com
-                        </SelectItem>
-                        <SelectItem value="user2@example.com">
-                          user2@example.com
-                        </SelectItem>
-                        <SelectItem value="ahmad.hidayat@test.com">
-                          ahmad.hidayat@test.com
-                        </SelectItem>
-                        <SelectItem value="siti.nurhaliza@test.com">
-                          siti.nurhaliza@test.com
-                        </SelectItem>
+                        <SelectItem value="admin@test.com">admin@test.com</SelectItem>
+                        <SelectItem value="user1@example.com">user1@example.com</SelectItem>
+                        <SelectItem value="user2@example.com">user2@example.com</SelectItem>
+                        <SelectItem value="ahmad.hidayat@test.com">ahmad.hidayat@test.com</SelectItem>
+                        <SelectItem value="siti.nurhaliza@test.com">siti.nurhaliza@test.com</SelectItem>
                       </SelectContent>
                     </Select>
                     <Badge
@@ -301,15 +266,12 @@ export function MLOpsWizard() {
                     Python Engine is training...
                   </h3>
                   <p className="text-gray-600 max-w-md">
-                    Evaluating Logistic Regression, Random Forest, and XGBoost
-                    models. Please wait.
+                    Evaluating Logistic Regression, Random Forest, and XGBoost models. Please wait.
                   </p>
                 </div>
                 <div className="w-full max-w-md">
                   <Progress value={progress} className="h-3" />
-                  <p className="text-center text-sm text-gray-500 mt-2">
-                    {progress}% Complete
-                  </p>
+                  <p className="text-center text-sm text-gray-500 mt-2">{progress}% Complete</p>
                 </div>
                 <Button disabled className="bg-gray-400 text-white px-6">
                   Training...
@@ -352,43 +314,29 @@ export function MLOpsWizard() {
                         <div className="flex items-center gap-2">
                           {model.algorithm}
                           {model.status === "Winner" && (
-                            <Badge className="bg-green-600 text-white">
-                              Recommended
-                            </Badge>
+                            <Badge className="bg-green-600 text-white">Recommended</Badge>
                           )}
                         </div>
                       </TableCell>
                       <TableCell>
                         <span
-                          className={
-                            model.status === "Winner"
-                              ? "font-semibold text-green-700"
-                              : ""
-                          }
+                          className={model.status === "Winner" ? "font-semibold text-green-700" : ""}
                         >
                           {model.accuracy}%
                         </span>
                       </TableCell>
                       <TableCell>
                         <span
-                          className={
-                            model.status === "Winner"
-                              ? "font-semibold text-green-700"
-                              : ""
-                          }
+                          className={model.status === "Winner" ? "font-semibold text-green-700" : ""}
                         >
                           {model.f1Score.toFixed(2)}
                         </span>
                       </TableCell>
                       <TableCell>
                         <Badge
-                          variant={
-                            model.status === "Winner" ? "default" : "secondary"
-                          }
+                          variant={model.status === "Winner" ? "default" : "secondary"}
                           className={
-                            model.status === "Winner"
-                              ? "bg-green-100 text-green-800"
-                              : ""
+                            model.status === "Winner" ? "bg-green-100 text-green-800" : ""
                           }
                         >
                           {model.status}
@@ -423,8 +371,7 @@ export function MLOpsWizard() {
                     Deployment Successful!
                   </h3>
                   <p className="text-gray-600 max-w-lg">
-                    Model V2 is now active in production. The user has been
-                    successfully upgraded to Phase 2 (Intervention).
+                    Model V2 is now active in production. The user has been successfully upgraded to Phase 2 (Intervention).
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -434,11 +381,7 @@ export function MLOpsWizard() {
                   >
                     Return to Dashboard
                   </Button>
-                  <Button
-                    onClick={handleReset}
-                    variant="outline"
-                    className="px-6"
-                  >
+                  <Button onClick={handleReset} variant="outline" className="px-6">
                     Start New Retraining
                   </Button>
                 </div>
