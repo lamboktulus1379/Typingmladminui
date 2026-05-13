@@ -16,6 +16,7 @@ import { EvaluationReport } from "./pages/EvaluationReport";
 import { MLOpsDashboard } from "./pages/MLOpsDashboard";
 import { XAIDashboard } from "./pages/XAIDashboard";
 import { BiometricDemo } from "./pages/BiometricDemo";
+import { DataOpsPanel } from "./pages/DataOpsPanel";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
       { path: "mlops-dashboard", Component: MLOpsDashboard },
       { path: "xai-dashboard", Component: XAIDashboard },
       { path: "biometric-demo", Component: BiometricDemo },
+      { path: "dataops-panel", Component: DataOpsPanel },
       { path: "settings", Component: Settings },
       { path: "help", Component: Help },
     ],
